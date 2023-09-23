@@ -26,7 +26,7 @@ function package() {
   const args = [
     'package',
     core.getInput('chart'),
-    RELEASE_DIR,
+    `--destination=${RELEASE_DIR}`,
   ];
   
   const version = core.getInput('version');
