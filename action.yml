@@ -7,6 +7,9 @@ inputs:
   version:
     description: Override Helm chart version.
     required: false
+  appVersion:
+    description: Override Helm chart appVersion.
+    required: false
   chart:
     description: The local Helm cart folder path.
     default: './'
