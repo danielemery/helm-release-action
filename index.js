@@ -24,12 +24,9 @@ function repo() {
 // Returns argument required to generate the chart package.
 function package() {
   const args = [
-    'pack',
+    'package',
     core.getInput('chart'),
-    '--dependency-update',
-    '--destination',
     RELEASE_DIR,
-    ...core.getInput('packageExtraArgs').split(/\s+/),
   ];
   
   const version = core.getInput('version');
@@ -51,16 +48,10 @@ function push() {
   const args = [
     's3',
     'push',
+    '--relative',
     releaseFile,
     REPO_ALIAS,
   ];
-  
-  const forceRelease = core.getInput('forceRelease', { required: true }) === 'true';
-  if (forceRelease) {
-    args.push('--force');
-  } else {
-    args.push('--ignore-if-exists');
-  }
 
   return args;
 }
@@ -69,7 +60,6 @@ function push() {
 function installPlugins() {
   const plugins = [
     'https://github.com/hypnoglow/helm-s3.git',
-    'https://github.com/thynquest/helm-pack.git',
   ];
 
   return Promise.all(plugins.map(plugin => exec.exec(HELM, ['plugin', 'install', plugin])));

@@ -1,4 +1,4 @@
-name: 'Helm release'
+name: 'S3 Helm release'
 description: 'Build and release Helm packages on s3 repositories.'
 branding:
   icon: 'arrow-up-circle'
@@ -17,13 +17,6 @@ inputs:
   repo:
     description: The S3 Helm repository bucket URL.
     required: true
-  forceRelease:
-    description: Force and replace existing release if a release with the same version already exist.
-    default: 'true'
-    required: true
-  packageExtraArgs:
-    description: Helm package command extra arguments.
-    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
